@@ -13,6 +13,7 @@ const Add_Profile = () => {
             alt="logo"
           />
         </div>
+
         <div className="">
           <h2 className="text-lg border-b mb-3 pb-2">Add Profile</h2>
           <h5 className="mb-5 text-red-500">* Required field</h5>
