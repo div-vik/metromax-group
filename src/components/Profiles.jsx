@@ -83,6 +83,8 @@ const Profiles = () => {
     window.location.reload(true);
   };
 
+  // console.log(rowsToEdit);
+
   const handleEdit = (idx) => {
     setRowsToEdit(idx);
     setOpen(true);
