@@ -106,7 +106,9 @@ const Add_Profile = ({ setOpen, defaultValues, rowsToEdit }) => {
         </div>
 
         <div className="">
-          <h2 className="text-lg border-b mb-3 pb-2">Add Profile</h2>
+          <h2 className="text-lg border-b mb-3 pb-2">
+            {rowsToEdit !== null ? "Edit Profile" : "Add Profile"}
+          </h2>
           <h5 className="mb-5 text-red-500">* Required field</h5>
           <form className="mb-5 grid lg:grid-cols-2 gap-7">
             <div>
