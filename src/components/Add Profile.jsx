@@ -25,6 +25,7 @@ const Add_Profile = ({ setOpen, defaultValues }) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+    window.location.reload(true);
   };
 
   useEffect(() => {
