@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const Add_Profile = ({ setOpen, defaultValues }) => {
+const Add_Profile = ({ setOpen, defaultValues, rowsToEdit }) => {
   const initialValues = {
     fullName: "",
     phone: "",
@@ -29,21 +29,39 @@ const Add_Profile = ({ setOpen, defaultValues }) => {
   };
 
   useEffect(() => {
-    // console.log(formErrors);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      const _profiles =
-        localStorage.getItem("profiles") &&
-        localStorage.getItem("profiles").length > 0
-          ? JSON.parse(localStorage.getItem("profiles"))
-          : [];
-      localStorage.setItem(
-        "profiles",
-        JSON.stringify([..._profiles, formValues])
-      );
+      if (rowsToEdit !== null) {
+        let profiles =
+          localStorage.getItem("profiles") &&
+          localStorage.getItem("profiles").length > 0
+            ? JSON.parse(localStorage.getItem("profiles"))
+            : [];
+
+        const _profile = profiles.map((profile, profileIdx) => {
+          if (profileIdx == rowsToEdit) {
+            return formValues;
+          } else {
+            return profile;
+          }
+        });
+        console.log(_profile);
+        localStorage.setItem("profiles", JSON.stringify(_profile));
+      } else {
+        const _profiles =
+          localStorage.getItem("profiles") &&
+          localStorage.getItem("profiles").length > 0
+            ? JSON.parse(localStorage.getItem("profiles"))
+            : [];
+        localStorage.setItem(
+          "profiles",
+          JSON.stringify([..._profiles, formValues])
+        );
+      }
       setOpen(false);
-      console.log(formValues);
     }
   }, [formErrors]);
+
+  console.log(localStorage.getItem("profiles"));
 
   const validate = (values) => {
     const errors = {};
@@ -199,7 +217,7 @@ const Add_Profile = ({ setOpen, defaultValues }) => {
             onClick={handleSubmit}
             className="bg-orange-500 rounded-lg px-4 py-3 mb-2 hover:shadow-lg"
           >
-            {defaultValues === "no values" ? "Add Profile" : "Save"}
+            {defaultValues === "" ? "Add Profile" : "Save"}
           </button>
         </div>
       </div>

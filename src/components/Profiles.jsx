@@ -60,11 +60,6 @@ const Profiles = () => {
   // const [order, setOrder] = React.useState();
   // const [orderBy, setOrderBy] = React.useState();
 
-  React.useEffect(() => {
-    const profiles = localStorage.getItem("profiles");
-    setRows(JSON.parse(profiles));
-  }, []);
-
   // console.log(rows);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -82,15 +77,15 @@ const Profiles = () => {
   };
 
   const handleDelete = (idx) => {
-    setRows(rows.filter((_, index) => index !== idx));
-    localStorage.setItem("profiles", JSON.stringify(rows));
+    console.log(idx);
+    const data = rows.filter((row, index) => index !== idx);
+    localStorage.setItem("profiles", JSON.stringify(data));
+    window.location.reload(true);
   };
 
   const handleEdit = (idx) => {
     setRowsToEdit(idx);
     setOpen(true);
-    const data = rows.filter((_, index) => index === idx);
-    console.log(data);
   };
 
   // const handleSorting = (cellId) => {
@@ -107,6 +102,11 @@ const Profiles = () => {
 
   //   XLSX.writeFile(wb, "Profiles.xlsx");
   // };
+
+  React.useEffect(() => {
+    const profiles = localStorage.getItem("profiles");
+    setRows(JSON.parse(profiles));
+  }, []);
 
   return (
     <div className="px-5 shadow-lg py-4 max-w-[370px] md:max-w-[640px] lg:max-w-[1000px] md:flex md:justify-center md:items-center mx-auto my-5 lg:my-16 rounded-xl">
@@ -140,13 +140,18 @@ const Profiles = () => {
 
             {rowsToEdit === null ? (
               <Modal open={open} onClose={handleClose}>
-                <Add_Profile setOpen={setOpen} defaultValues="no values" />
+                <Add_Profile
+                  setOpen={setOpen}
+                  defaultValues=""
+                  rowsToEdit={rowsToEdit}
+                />
               </Modal>
             ) : (
               <Modal open={open} onClose={handleClose}>
                 <Add_Profile
                   setOpen={setOpen}
                   defaultValues={rowsToEdit !== null && rows[rowsToEdit]}
+                  rowsToEdit={rowsToEdit}
                 />
               </Modal>
             )}
@@ -198,9 +203,7 @@ const Profiles = () => {
                                 const value = row[column.id];
                                 return (
                                   <TableCell key={column.id}>
-                                    {value !== undefined ? (
-                                      value
-                                    ) : (
+                                    {value === undefined ? (
                                       <>
                                         <Tooltip title="Edit">
                                           <button
@@ -222,6 +225,8 @@ const Profiles = () => {
                                           </button>
                                         </Tooltip>
                                       </>
+                                    ) : (
+                                      value
                                     )}
                                   </TableCell>
                                 );
