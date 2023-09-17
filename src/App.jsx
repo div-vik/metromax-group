@@ -1,7 +1,11 @@
-import "./App.css";
+import Profiles from "./components/Profiles";
 
 function App() {
-  return <>Hello</>;
+  return (
+    <>
+      <Profiles />
+    </>
+  );
 }
 
 export default App;
