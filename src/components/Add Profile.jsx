@@ -25,7 +25,6 @@ const Add_Profile = ({ setOpen, defaultValues, rowsToEdit }) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-    window.location.reload(true);
   };
 
   useEffect(() => {
@@ -57,11 +56,10 @@ const Add_Profile = ({ setOpen, defaultValues, rowsToEdit }) => {
           JSON.stringify([..._profiles, formValues])
         );
       }
+      window.location.reload(true);
       setOpen(false);
     }
   }, [formErrors]);
-
-  console.log(localStorage.getItem("profiles"));
 
   const validate = (values) => {
     const errors = {};
@@ -72,6 +70,8 @@ const Add_Profile = ({ setOpen, defaultValues, rowsToEdit }) => {
     }
     if (!values.phone) {
       errors.phone = "Phone Number is required!";
+    } else if (values.phone.length !== 10) {
+      errors.phone = "Please enter valid phone number!";
     }
     if (!values.email) {
       errors.email = "Email is required!";
@@ -193,9 +193,9 @@ const Add_Profile = ({ setOpen, defaultValues, rowsToEdit }) => {
                 className="rounded-md ring-1 ring-black mt-2 w-full focus:outline-none px-2 bg-white py-[0.6rem]"
               >
                 <option value="gender">Select gender</option>
-                <option value="female">Female</option>
-                <option value="male">Male</option>
-                <option value="other">Other</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Other">Other</option>
               </select>
               <p className="text-red-500 mt-2">{formErrors.gender}</p>
             </div>
