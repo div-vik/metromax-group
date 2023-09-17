@@ -57,8 +57,8 @@ const Profiles = () => {
   const [rows, setRows] = React.useState([]);
   const [rowsToEdit, setRowsToEdit] = React.useState(null);
   const [search, setSearch] = React.useState("");
-  const [order, setOrder] = React.useState();
-  const [orderBy, setOrderBy] = React.useState();
+  // const [order, setOrder] = React.useState();
+  // const [orderBy, setOrderBy] = React.useState();
 
   React.useEffect(() => {
     const profiles = localStorage.getItem("profiles");
@@ -93,11 +93,11 @@ const Profiles = () => {
     console.log(data);
   };
 
-  const handleSorting = (cellId) => {
-    const isAsc = orderBy === cellId && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(cellId);
-  };
+  // const handleSorting = (cellId) => {
+  //   const isAsc = orderBy === cellId && order === "asc";
+  //   setOrder(isAsc ? "desc" : "asc");
+  //   setOrderBy(cellId);
+  // };
 
   // const handleExportToExcel = () => {
   //   var wb = XLSX.utils.book_new(),
