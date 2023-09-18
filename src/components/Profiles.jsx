@@ -79,8 +79,8 @@ const Profiles = () => {
   const handleDelete = (idx) => {
     console.log(idx);
     const data = rows.filter((row, index) => index !== idx);
+    setRows(data);
     localStorage.setItem("profiles", JSON.stringify(data));
-    window.location.reload(true);
   };
 
   // console.log(rowsToEdit);
