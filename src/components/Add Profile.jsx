@@ -27,6 +27,22 @@ const Add_Profile = ({ setOpen, defaultValues, rowsToEdit }) => {
     setIsSubmit(true);
   };
 
+  const currentDate = () => {
+    let date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    if (month < 10) month = "0" + month.toString();
+    if (day < 10) day = "0" + day.toString();
+
+    let res = `${year}-${month}-${day}`;
+    return res;
+  };
+
+  const today = currentDate();
+
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       if (rowsToEdit !== null) {
@@ -163,6 +179,7 @@ const Add_Profile = ({ setOpen, defaultValues, rowsToEdit }) => {
                 onChange={handleChange}
                 className="rounded-md ring-1 ring-black mt-2 w-full focus:outline-none px-2 py-2"
                 type="date"
+                max={today}
               />
               <p className="text-red-500 mt-2">{formErrors.dateOfBirth}</p>
             </div>
