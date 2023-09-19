@@ -38,3 +38,13 @@ http://localhost:5173/
 ```
 
 You can then use the features of the project to manage user profiles.
+
+### Tech Stack
+```
+ReactJS
+HTML
+TailwindCSS
+JavaScript
+Material UI
+
+```
